@@ -3,7 +3,7 @@ import './scroll.css'
 function scroll_animation() {
     return(
         <>
-            <div class="spinner scroll-down"> <a class="animate"></a> </div>
+            <div className="spinner scroll-down"> <a className="animate"></a> </div>
         </>
     );
 }
