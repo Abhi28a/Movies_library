@@ -1,0 +1,102 @@
+/* styles.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #E7F0DC, #729762);
+}
+
+#root {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    background-color: #E7F0DC; /* Lightest color from the palette */
+    border-bottom: 1px solid #597445; /* Darkest color from the palette */
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    font-family: 'Poppins', sans-serif; /* Using Poppins font family */
+}
+
+nav a {
+    color: black; /* Setting text color to black for contrast */
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 10px;
+    font-size: 16px;
+    font-weight: 500; /* Adding font weight */
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+nav a:hover {
+    color: white; /* Setting hover text color to white for contrast */
+    background-color: #597445; /* Darkest color from the palette for hover background */
+    border-radius: 25px;
+}
+
+nav a:active {
+    color: white; /* Setting active text color to white for contrast */
+    background-color: #658147; /* Medium color from the palette for active background */
+}
+
+nav a:first-child {
+    margin-left: 0;
+}
+
+nav a:last-child {
+    margin-right: 0;
+}
+
+.header {
+    position: relative;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+
+.main-text {
+    position: relative;
+    font-size: 8rem;
+    font-weight: 500;
+    -webkit-text-stroke-width: 4px;
+    -webkit-text-stroke-color: white;
+    color: transparent;
+    z-index: 1;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+
+
+footer {
+    background-color: #729762; /* Using another color from the palette */
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-family: 'Poppins', sans-serif;
+    border-top: 1px solid #597445; /* Matching the nav border color */
+    margin-top: auto; /* Push footer to the bottom */
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500; /* Adding font weight */
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #E7F0DC; /* Lightest color from the palette for hover effect */
+}
