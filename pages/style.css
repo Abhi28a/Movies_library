@@ -1,0 +1,162 @@
+/* Navbar Styles */
+nav {
+    background-color: #E7F0DC; /* Light background color */
+    border-bottom: 1px solid #597445; /* Darker color for bottom border */
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+nav a {
+    color: black; /* Text color */
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 10px;
+    font-size: 16px;
+    font-weight: 500; /* Medium font weight */
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+nav a:hover {
+    color: white; /* Text color on hover */
+    background-color: #597445; /* Background color on hover */
+    border-radius: 25px; /* Rounded corners */
+}
+
+nav a:active {
+    color: white; /* Text color when active */
+    background-color: #658147; /* Background color when active */
+}
+
+nav a:first-child {
+    margin-left: 0;
+}
+
+nav a:last-child {
+    margin-right: 0;
+}
+
+/* ----------------------------------------------------------------------------------------- */
+
+.header {
+    position: relative;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+
+.main-text {
+    position: relative;
+    font-size: 5rem;
+    font-weight: 500;
+    color: black;
+    z-index: 1;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Centers the child element horizontally */
+    margin-top: 15%; /* Moves the container down */
+}
+
+.recents {
+    display: inline-block; /* Makes the box fit the content */
+    border: 2px solid black; /* Define border width */
+    border-radius: 25px; /* Rounded corners */
+    padding: 7px; /* Increased padding for better spacing */
+    background-color: #f0f0f0; /* Light gray background for better contrast */
+}
+
+.recentCards {
+    margin: 6%;
+    border-radius: 5px;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allows wrapping to the next line */
+    gap: 10px; /* Adds space between cards */
+    cursor: pointer;
+}
+
+.cards {
+    position: relative; /* Required for positioning the buttons */
+    display: flex;
+    flex-direction: column; /* Ensures the img is centered vertically within the card */
+    align-items: center;
+    border: 6px solid #E7F0DC;
+    margin: 10px;
+}
+
+.cards img {
+    max-width: 230px;
+    max-height: 700px;
+    width: 100%; 
+    height: auto; 
+    transition: transform 0.3s; /* Smooth transition for image hover */
+}
+
+.cards:hover img {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.buttons {
+    position: absolute;
+    
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    gap: 5px; /* Space between buttons */
+    transition: opacity 0.3s; /* Smooth transition for buttons */
+}
+
+.cards:hover .buttons {
+    
+    display: flex; /* Show buttons on hover */
+    opacity: 1;
+}
+
+.btn {
+    
+    background-color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for buttons */
+}
+
+.btn:hover {
+    cursor: not-allowed;
+    background-color: #f0f0f0; /* Slightly darker background on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* ------------------------------------------------------------------------------ */
+
+footer {
+    background-color: #729762; /* Using another color from the palette */
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-family: 'Poppins', sans-serif;
+    border-top: 1px solid #597445; /* Matching the nav border color */
+    margin-top: auto; /* Push footer to the bottom */
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500; /* Adding font weight */
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #E7F0DC; /* Lightest color from the palette for hover effect */
+}
