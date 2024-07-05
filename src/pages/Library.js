@@ -1,82 +1,67 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import axiosRetry from 'axios-retry';
+import './style.css'; // Import the CSS file
 
-axiosRetry(axios, { 
-  retries: 5, 
-  retryCondition: (error) => error.response.status === 429,
-  retryDelay: (retryCount) => axiosRetry.exponentialDelay(retryCount)
-});
-
-const Library = () => {
-  const [movieData, setMovieData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+function Library({ ids }) {
+  const [dataList, setDataList] = useState([]);
 
   useEffect(() => {
-    const fetchMovieData = async () => {
+    const fetchData = async (id) => {
+      const options = {
+        method: 'GET',
+        url: 'https://imdb146.p.rapidapi.com/v1/name/',
+        params: { id },
+        headers: {
+          'x-rapidapi-key': 'a9fd8fb752mshd7ab6fb3e318daap1485f1jsn2863c178984f',
+          'x-rapidapi-host': 'imdb146.p.rapidapi.com'
+        }
+      };
+
       try {
-        const response = await axios.get('https://movies-ratings2.p.rapidapi.com/ratings', {
-          params: { limit: 50 }, // Assuming the API supports a limit parameter
-          headers: {
-            'X-RapidAPI-Key': 'YOUR_RAPIDAPI_KEY',
-            'X-RapidAPI-Host': 'movies-ratings2.p.rapidapi.com'
-          }
-        });
-        setMovieData(response.data);
+        const response = await axios.request(options);
+        return response.data;
       } catch (error) {
-        console.error('Error fetching movie data:', error);
+        console.error(`Error fetching data for ID ${id}:`, error);
+        return null; // Return null for failed requests
       }
     };
 
-    fetchMovieData();
-  }, []);
+    const fetchAllData = async () => {
+      const promises = ids.map(id => fetchData(id));
+      const results = await Promise.all(promises);
+      setDataList(results.filter(data => data !== null)); // Filter out null responses
+    };
 
-  // Pagination logic
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = movieData.slice(indexOfFirstItem, indexOfLastItem);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    fetchAllData();
+  }, [ids]);
 
   return (
-    <div>
-      <h1>Movie Library</h1>
-      <ul>
-        {currentItems.map(movie => (
-          <li key={movie.id}>{movie.title}</li>
-        ))}
-      </ul>
-      <Pagination 
-        itemsPerPage={itemsPerPage} 
-        totalItems={movieData.length} 
-        paginate={paginate} 
-        currentPage={currentPage}
-      />
+    <div className="library-container">
+      {dataList.length > 0 ? (
+        dataList.map((data, index) => (
+          <div key={index} className="card">
+            <h2>ID: {data.id}</h2>
+            <div className="award-summary">
+              <p><strong>Total Wins:</strong> {data.wins ? data.wins.total : 'N/A'}</p>
+              <p><strong>Total Nominations:</strong> {data.nominations ? data.nominations.total : 'N/A'}</p>
+              <p><strong>Oscar Wins:</strong> {data.prestigiousAwardSummary ? data.prestigiousAwardSummary.wins : 'N/A'}</p>
+              <p><strong>Oscar Nominations:</strong> {data.prestigiousAwardSummary ? data.prestigiousAwardSummary.nominations : 'N/A'}</p>
+            </div>
+            <div className="images">
+              {data.images && data.images.edges.map((image, imgIndex) => (
+                <div key={imgIndex} className="image">
+                  <img src={image.node.url} alt={image.node.caption ? image.node.caption.plainText : 'Image'} />
+                  <p>{image.node.caption ? image.node.caption.plainText : 'Image Caption'}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
-};
-
-const Pagination = ({ itemsPerPage, totalItems, paginate, currentPage }) => {
-  const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
-    pageNumbers.push(i);
-  }
-
-  return (
-    <nav>
-      <ul className='pagination'>
-        {pageNumbers.map(number => (
-          <li key={number} className={currentPage === number ? 'active' : ''}>
-            <a onClick={() => paginate(number)} href='!#'>
-              {number}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
+}
 
 export default Library;
