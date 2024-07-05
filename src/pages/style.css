@@ -40,6 +40,7 @@ nav a:last-child {
 
 .header {
     position: relative;
+    padding: 30px;
     height: 55vh;
     display: flex;
     justify-content: center;
@@ -219,3 +220,38 @@ footer a:hover {
     margin-top: 5px;
   }
   
+
+  /* ----------------------------------------------------------------------------------------- */
+/* About Page */
+.about-container {
+    padding: 20px;
+    background: #f9f9f9;
+    color: #333;
+    font-family: 'Arial, sans-serif';
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .about-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #ff6347;
+  }
+  
+  .about-container h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #20b2aa;
+  }
+  
+  .about-container p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .AboutEmoji {
+    font-size: 1.5em;
+    margin-left: 5px;
+  }
