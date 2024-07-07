@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './style.css'; // Import the CSS file
 
-function Library({ ids }) {
-  const [dataList, setDataList] = useState([]);
+function Library() {
+  const [data, setData] = useState(null);
 
   useEffect(() => {
-    const fetchData = async (id) => {
+    const fetchData = async () => {
       const options = {
         method: 'GET',
         url: 'https://imdb146.p.rapidapi.com/v1/name/',
-        params: { id },
+        params: { id: 'nm0000093' },
         headers: {
           'x-rapidapi-key': 'a9fd8fb752mshd7ab6fb3e318daap1485f1jsn2863c178984f',
           'x-rapidapi-host': 'imdb146.p.rapidapi.com'
@@ -19,44 +19,35 @@ function Library({ ids }) {
 
       try {
         const response = await axios.request(options);
-        return response.data;
+        setData(response.data);
       } catch (error) {
-        console.error(`Error fetching data for ID ${id}:`, error);
-        return null; // Return null for failed requests
+        console.error(error);
       }
     };
 
-    const fetchAllData = async () => {
-      const promises = ids.map(id => fetchData(id));
-      const results = await Promise.all(promises);
-      setDataList(results.filter(data => data !== null)); // Filter out null responses
-    };
-
-    fetchAllData();
-  }, [ids]);
+    fetchData();
+  }, []);
 
   return (
     <div className="library-container">
-      {dataList.length > 0 ? (
-        dataList.map((data, index) => (
-          <div key={index} className="card">
-            <h2>ID: {data.id}</h2>
-            <div className="award-summary">
-              <p><strong>Total Wins:</strong> {data.wins ? data.wins.total : 'N/A'}</p>
-              <p><strong>Total Nominations:</strong> {data.nominations ? data.nominations.total : 'N/A'}</p>
-              <p><strong>Oscar Wins:</strong> {data.prestigiousAwardSummary ? data.prestigiousAwardSummary.wins : 'N/A'}</p>
-              <p><strong>Oscar Nominations:</strong> {data.prestigiousAwardSummary ? data.prestigiousAwardSummary.nominations : 'N/A'}</p>
-            </div>
-            <div className="images">
-              {data.images && data.images.edges.map((image, imgIndex) => (
-                <div key={imgIndex} className="image">
-                  <img src={image.node.url} alt={image.node.caption ? image.node.caption.plainText : 'Image'} />
-                  <p>{image.node.caption ? image.node.caption.plainText : 'Image Caption'}</p>
-                </div>
-              ))}
-            </div>
+      {data ? (
+        <div className="card">
+          {/* <h2>{data.title}</h2> */}
+          <div className="award-summary">
+            <p><strong>Total Wins:</strong> {data.wins.total}</p>
+            <p><strong>Total Nominations:</strong> {data.nominations.total}</p>
+            <p><strong>Oscar Wins:</strong> {data.prestigiousAwardSummary.wins}</p>
+            <p><strong>Oscar Nominations:</strong> {data.prestigiousAwardSummary.nominations}</p>
           </div>
-        ))
+          <div className="images">
+            {data.images.edges.map((image, index) => (
+              <div key={index} className="image">
+                <img src={image.node.url} alt={image.node.caption.plainText} />
+                <p>{image.node.caption.plainText}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       ) : (
         <p>Loading...</p>
       )}
