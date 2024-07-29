@@ -4,7 +4,7 @@ nav {
     border-bottom: 1px solid #597445; /* Darker color for bottom border */
     display: flex;
     justify-content: center;
-    padding: 10px 0;
+    padding: 14px 0;
 }
 
 nav a {
@@ -40,7 +40,7 @@ nav a:last-child {
 
 .header {
     position: relative;
-    padding: 30px;
+    padding: 25px;
     height: 55vh;
     display: flex;
     justify-content: center;
@@ -51,13 +51,19 @@ nav a:last-child {
 
 
 .main-text {
-    position: relative;
+    /* position: relative;
     font-size: 5rem;
     font-weight: 500;
     color: black;
     z-index: 1;
+    */
     text-align: center;
-}
+    font-size: 89px;
+    background: linear-gradient(65deg, #6482AD,#7FA1C3, #C9DABF, #E2DAD6,  #9CA986);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* animation: gradient-rotation 1s infinite linear; */
+    }
 
 .container {
     display: flex;
@@ -152,15 +158,12 @@ footer {
 }
 
 footer a {
-    color: white;
+    color: #1A3636;
     text-decoration: none;
     font-weight: 500; /* Adding font weight */
     transition: color 0.3s ease;
 }
 
-footer a:hover {
-    color: #E7F0DC; /* Lightest color from the palette for hover effect */
-}
 
 
 /* library css */
